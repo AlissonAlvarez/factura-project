@@ -1,0 +1,37 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de testing
+.coverage
+*.cover
+htmlcov/
+
+# Archivos de distribución/paquetes
+dist/
+build/
+*.egg-info/
+
+# Configuración local de Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Otros
+*.sqlite3

@@ -1,0 +1,1 @@
+from .semantic_extraction import extract_semantic_data

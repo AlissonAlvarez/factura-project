@@ -18,7 +18,7 @@ El proyecto está organizado en los siguientes módulos:
 -   `preprocess/`: Funciones para la limpieza y mejora de las imágenes de facturas (deskew, denoise).
 -   `ocr_layout/`: Módulo encargado de la extracción de texto y tablas usando Tesseract y pdfplumber.
 -   `extractor/`: Contiene la lógica para la extracción semántica de campos específicos mediante expresiones regulares.
--   `llm/`: Integra un modelo de lenguaje de Hugging Face para normalizar datos y asistir en la desambiguación.
+-   `llm/`: Integra un modelo de lenguaje de llama3.1:8b.
 -   `rag/`: Implementa el sistema RAG. Construye una base de conocimiento vectorial a partir de documentos de políticas y la usa para validar los datos extraídos.
 -   `reporter/`: Genera el reporte final en formato PDF a partir de una plantilla HTML (Jinja2 + WeasyPrint).
 -   `data/`: Directorios para almacenar las facturas de entrada y los documentos de reglas.

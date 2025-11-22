@@ -1,0 +1,112 @@
+{
+  "numero_factura": "0131026",
+  "fecha_emision": "2025-11-14",
+  "proveedor": "SHANGHAI NEW TIANHE RESIN CO.,",
+  "nit_proveedor": "806009473-5",
+  "direccion_proveedor": "CR 7 80 49",
+  "subtotal": 540.0,
+  "impuestos": "0.00",
+  "total": 540.0,
+  "moneda": "USD",
+  "items": [
+    {
+      "descripcion": "GATE IN",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "35.00"
+    },
+    {
+      "descripcion": "GATE OUT",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "35.00"
+    },
+    {
+      "descripcion": "CLEANING TYPE D",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "470.00"
+    }
+  ],
+  "nit_emisor": "806009473-5",
+  "iva": 0.0,
+  "cufe": "N/A",
+  "actividad_economica": "N/A",
+  "retencion_fuente": 0.04,
+  "forma_pago": "N/A",
+  "fecha_limite_pago": "N/A",
+  "validation": {
+    "valid": true,
+    "confidence_score": 0.8,
+    "errors": [],
+    "warnings": [
+      "Dígito de verificación incorrecto. Esperado: 8, Encontrado: 5",
+      "CUFE no encontrado (requerido para factura electrónica)"
+    ],
+    "validations": [
+      {
+        "field": "Fecha de Emisión",
+        "valid": true,
+        "severity": "success",
+        "message": "Fecha de emisión válida: 2025-11-14"
+      },
+      {
+        "field": "NIT Emisor",
+        "valid": false,
+        "severity": "warning",
+        "message": "Dígito de verificación incorrecto. Esperado: 8, Encontrado: 5"
+      },
+      {
+        "field": "CUFE",
+        "valid": false,
+        "severity": "warning",
+        "message": "CUFE no encontrado (requerido para factura electrónica)"
+      },
+      {
+        "field": "Coherencia de Totales",
+        "valid": true,
+        "severity": "success",
+        "message": "Totales coherentes: 540.00 + 0.00 = 540.00"
+      },
+      {
+        "field": "Porcentaje IVA",
+        "valid": true,
+        "severity": "success",
+        "message": "IVA válido: 0.00%"
+      },
+      {
+        "field": "Suma de Ítems",
+        "valid": true,
+        "severity": "success",
+        "message": "Suma de 3 ítems coincide con subtotal"
+      },
+      {
+        "field": "Actividad Económica",
+        "valid": true,
+        "severity": "warning",
+        "message": "Código de actividad económica no especificado"
+      },
+      {
+        "field": "Retención en la Fuente",
+        "valid": true,
+        "severity": "success",
+        "message": "Retención en la fuente: 4.00%"
+      },
+      {
+        "field": "Fecha Límite de Pago",
+        "valid": true,
+        "severity": "warning",
+        "message": "Fecha límite de pago no especificada"
+      },
+      {
+        "field": "Resolución DIAN",
+        "valid": true,
+        "severity": "success",
+        "message": "Proveedor encontrado en base de conocimiento"
+      }
+    ],
+    "recommendation": "⚠️ Factura válida con advertencias menores",
+    "total_validations": 10,
+    "passed_validations": 8
+  }
+}

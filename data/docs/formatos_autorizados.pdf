@@ -1,0 +1,51 @@
+FORMATOS AUTORIZADOS DE FACTURACIÓN ELECTRÓNICA
+Resolución DIAN
+
+1. ESTRUCTURA OBLIGATORIA
+   ✓ Número de factura con prefijo
+   ✓ Fecha de emisión (formato MM/DD/YYYY)
+   ✓ NIT emisor con dígito de verificación
+   ✓ Datos completos del cliente (NIT, razón social)
+   ✓ CUFE (hash SHA-384 de 128 caracteres hexadecimales)
+
+2. RESOLUCIÓN DIAN
+   - Número de resolución
+   - Fecha de autorización
+   - Rango de numeración autorizado
+   - Fecha de vencimiento
+   - Validar que factura esté dentro del rango
+   - Validar que resolución esté vigente
+
+3. CAMPOS DE TOTALES
+   Obligatorios:
+   - Subtotal (sin IVA)
+   - IVA (puede ser 0)
+   - Total a pagar
+   
+   Opcionales pero recomendados:
+   - Retención en la fuente
+   - Retención ICA
+   - Descuentos
+
+4. TABLA DE ÍTEMS
+   Cada ítem debe contener:
+   - Código o descripción
+   - Cantidad (si aplica)
+   - Valor unitario (si aplica)
+   - Valor total de línea
+   - IVA por línea (si aplica)
+
+5. VALIDACIÓN CUFE
+   El CUFE debe ser generado según:
+   CUFE = SHA384(
+     NumeroFactura + 
+     FechaHora + 
+     ValorFactura + 
+     CodigoImpuestos + 
+     ValorImpuestos + 
+     ValorTotal + 
+     NITAdquiriente + 
+     NITEmisor + 
+     ClaveCompany + 
+     TipEnvironment
+   )

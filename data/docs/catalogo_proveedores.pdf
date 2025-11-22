@@ -1,0 +1,39 @@
+CATÁLOGO DE PROVEEDORES AUTORIZADOS
+Actualizado: Noviembre 2025
+
+PROVEEDORES LOGÍSTICOS CATEGORÍA A
+-----------------------------------
+1. UNITED LOGISTIC SERVICES S.A
+   - NIT: 806.009.473-5
+   - Actividad: Agente de Aduana (5229)
+   - Resolución DIAN: 0174
+   - Servicios: Logística internacional, aduana, almacenaje
+   - Estado: ACTIVO
+
+2. SUPREME INTERNATIONAL LOGISTICS PTE LTD
+   - NIT: 444.444.231
+   - Actividad: Servicios logísticos (5221)
+   - Servicios: Gate in/out, limpieza de contenedores
+   - Estado: ACTIVO
+
+VALIDACIONES DE NIT
+------------------
+- Formato: 9-10 dígitos + dígito de verificación
+- Ejemplo válido: 806009473-5
+- Verificar dígito de control mediante algoritmo módulo 11
+
+SERVICIOS AUTORIZADOS POR PROVEEDOR
+-----------------------------------
+UNITED LOGISTIC SERVICES:
+- FLETE LCL
+- GASTOS LOCALES
+- HANDLING
+- DOCUMENTACION
+- THC (Terminal Handling Charges)
+- ALMACENAJE
+
+SUPREME INTERNATIONAL LOGISTICS:
+- GATE IN
+- GATE OUT
+- CLEANING TYPE D
+- INSPECCION DE CONTENEDORES

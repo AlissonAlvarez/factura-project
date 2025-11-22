@@ -1,0 +1,25 @@
+POLÍTICA DE IMPUESTOS Y TARIFAS
+Empresa: [Tu Organización]
+Vigencia: 2025
+
+1. IVA (Impuesto al Valor Agregado)
+   - Tarifa general: 19%
+   - Servicios exentos de IVA:
+     * Servicios logísticos internacionales
+     * Transporte de carga internacional
+     * Servicios de aduana
+   - Tolerancia de redondeo: ±0.01%
+
+2. Retención en la Fuente
+   - Servicios logísticos: 4%
+   - Servicios profesionales: 11%
+   - Base de cálculo: sobre ingresos propios
+
+3. Impuesto de Industria y Comercio (ICA)
+   - Actividad 304: Tarifa 9.66 por mil
+   - Aplicable según municipio
+
+4. Validaciones Obligatorias
+   - Subtotal + IVA debe ser igual a Total
+   - Variación máxima permitida: COP $0.01
+   - IVA no debe exceder 19% del subtotal

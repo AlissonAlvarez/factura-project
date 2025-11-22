@@ -96,7 +96,7 @@ def main(args):
         print(f"{'─' * 70}")
         
         try:
-            # a) Preprocesamiento (solo para imágenes)
+            # a) Preprocesamiento
             processed_input = file_path
             if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
                 print("  🖼️  Preprocesando imagen...")
@@ -108,7 +108,7 @@ def main(args):
                     print("  ℹ️  Usando imagen original")
                     processed_input = file_path
             
-            # b) OCR y Layout
+            # b) OCR
             print("  📝 Extrayendo texto con OCR...")
             ocr_output = ocr_process_file(processed_input)
             
@@ -119,15 +119,22 @@ def main(args):
             ocr_text = ocr_output.get("text", "")
             print(f"  ✅ Texto extraído: {len(ocr_text)} caracteres")
             
-            # c) Extracción de datos semánticos
+            # c) Extracción semántica
             print("  🔍 Extrayendo campos clave...")
-            extracted_data = extract_semantic_data(ocr_output)
-            
-            # Asegurar estructura correcta
+
+            # ======================================================
+            #   ✅ AJUSTE QUE FALTABA (ENVÍA TEXTO COMPLETO AL EXTRACTOR)
+            # ======================================================
+            extracted_data = extract_semantic_data({
+                "text": ocr_text,
+                "file_path": file_path
+            })
+            # ======================================================
+
             if not isinstance(extracted_data, dict):
                 extracted_data = {}
             
-            # Garantizar campos mínimos
+            # Campos mínimos
             extracted_data.setdefault("numero_factura", None)
             extracted_data.setdefault("fecha_emision", None)
             extracted_data.setdefault("proveedor", None)
@@ -141,15 +148,18 @@ def main(args):
             
             print("  ✅ Campos extraídos")
             
-            # d) Validación con RAG (sin Gemini)
+            # d) Validación RAG local
             final_data = extracted_data
             
             if validator:
                 print("  🔎 Validando con base de conocimiento...")
                 try:
                     final_data = validator.validate(extracted_data, ocr_text)
-                    
-                    # Mostrar resumen de validación
+
+                    # ✅ AJUSTE AÑADIDO (EVITA ERROR GEMINI_API_KEY)
+                    final_data["llm_used"] = "none"
+                    final_data["llm_status"] = "disabled"
+
                     status = final_data.get("validation_status", "DESCONOCIDO")
                     validations = final_data.get("validations", {})
                     
@@ -176,12 +186,21 @@ def main(args):
                     final_data = extracted_data
                     final_data["validations"] = {}
                     final_data["validation_status"] = "ERROR"
+
+                    # ✅ AJUSTE AÑADIDO
+                    final_data["llm_used"] = "none"
+                    final_data["llm_status"] = "disabled"
+
             else:
                 print("  ℹ️  Saltando validación (RAG no disponible)")
                 final_data["validations"] = {}
                 final_data["validation_status"] = "NO_VALIDADO"
+
+                # ✅ AJUSTE AÑADIDO
+                final_data["llm_used"] = "none"
+                final_data["llm_status"] = "disabled"
             
-            # Guardar resultado JSON individual
+            # Guardar JSON
             json_filename = f"{os.path.splitext(filename)[0]}.json"
             json_path = os.path.join(json_output_dir, json_filename)
             
@@ -202,7 +221,7 @@ def main(args):
             print(f"  📋 Traceback: {traceback.format_exc()}")
             continue
     
-    # --- 4. Generación de Reporte Final ---
+    # --- 4. Generar reporte ---
     if all_results:
         print("\n" + "=" * 70)
         print("📊 GENERANDO REPORTE CONSOLIDADO")
@@ -229,7 +248,6 @@ def main(args):
             
             print(f"✅ Reporte generado: {report_path}")
             
-            # Resumen estadístico
             print("\n📈 RESUMEN:")
             print(f"   • Total procesadas: {len(all_results)}")
             
@@ -289,7 +307,6 @@ Ejemplos de uso:
         help='Deshabilitar validación con RAG'
     )
     
-    # Configuración por defecto
     parser.set_defaults(use_rag=True)
     
     args = parser.parse_args()

@@ -79,12 +79,16 @@ class RAGValidator:
         Formato de respuesta: [ESTADO] | [Justificación]
         """
 
-        if not self.llm or not self.llm.nlp:
+        # =====================================================
+        # 🔧 AJUSTE NECESARIO — MANEJO CUANDO FALTA EL LLM/API
+        # =====================================================
+        if not self.llm or not hasattr(self.llm, "nlp") or self.llm.nlp is None:
             return {
                 "status": "ADVERTENCIA",
-                "explicacion": "El LLM no está disponible para realizar la validación.",
+                "explicacion": "El modelo LLM no está inicializado o no tiene clave configurada.",
                 "contexto_documental": context_results
             }
+        # =====================================================
 
         # Obtener respuesta del LLM
         response = self.llm.nlp(prompt, max_length=256)[0]['generated_text']

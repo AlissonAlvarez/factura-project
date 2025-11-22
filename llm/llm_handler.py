@@ -18,6 +18,10 @@ class LLMHandler:
             print("Funcionalidad de LLM estará deshabilitada.")
             self.nlp = None
 
+            # 🔧 AJUSTE AÑADIDO (tal como pediste)
+            self.model = None
+            self.tokenizer = None
+
     def normalize_and_complete(self, extracted_data: Dict[str, Any], ocr_text: str) -> Dict[str, Any]:
         """
         Usa el LLM para normalizar y completar los datos extraídos.
@@ -46,19 +50,17 @@ class LLMHandler:
             
             # Procesar la respuesta
             if response and response[0]['generated_text']:
-                # El LLM debería devolver un string con formato JSON
                 llm_json_str = response[0]['generated_text']
                 
-                # Limpiar y parsear el JSON (esto es frágil y se debe mejorar)
+                # Limpiar y parsear el JSON
                 import json
+                import re
                 try:
-                    # Intentar encontrar el JSON en la respuesta
                     json_match = re.search(r'\{.*\}', llm_json_str, re.DOTALL)
                     if json_match:
                         cleaned_json = json.loads(json_match.group(0))
                         
-                        # Actualizar los datos extraídos con la versión del LLM
-                        # Se debe hacer con cuidado para no sobrescribir datos buenos
+                        # Actualizar los datos extraídos
                         for key, value in cleaned_json.items():
                             if key in extracted_data and value is not None:
                                 extracted_data[key] = value

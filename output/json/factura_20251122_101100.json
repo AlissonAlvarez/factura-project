@@ -1,0 +1,104 @@
+{
+  "numero_factura": "ELECTRONICA",
+  "fecha_emision": "10/31/2025",
+  "proveedor": "N/A",
+  "nit_proveedor": "901031154-7",
+  "direccion_proveedor": "CR 106 15",
+  "subtotal": 0.0,
+  "impuestos": "0.00",
+  "total": 0.0,
+  "moneda": "USD",
+  "items": [
+    {
+      "descripcion": "913 INTERESES DEL 1 AL 31 DE OCTUBRE",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "2,984,308.00"
+    }
+  ],
+  "nit_emisor": "901031154-7",
+  "iva": 0.0,
+  "cufe": "N/A",
+  "actividad_economica": "N/A",
+  "retencion_fuente": 0.04,
+  "forma_pago": "N/A",
+  "fecha_limite_pago": "N/A",
+  "validation": {
+    "valid": false,
+    "confidence_score": 0.5,
+    "errors": [
+      "Formato de fecha no reconocido: 10/31/2025",
+      "Total de factura es 0 o no encontrado"
+    ],
+    "warnings": [
+      "Dígito de verificación incorrecto. Esperado: 3, Encontrado: 7",
+      "CUFE no encontrado (requerido para factura electrónica)",
+      "Suma de ítems (2984308.00) no coincide con subtotal (0.00)"
+    ],
+    "validations": [
+      {
+        "field": "Fecha de Emisión",
+        "valid": false,
+        "severity": "error",
+        "message": "Formato de fecha no reconocido: 10/31/2025"
+      },
+      {
+        "field": "NIT Emisor",
+        "valid": false,
+        "severity": "warning",
+        "message": "Dígito de verificación incorrecto. Esperado: 3, Encontrado: 7"
+      },
+      {
+        "field": "CUFE",
+        "valid": false,
+        "severity": "warning",
+        "message": "CUFE no encontrado (requerido para factura electrónica)"
+      },
+      {
+        "field": "Coherencia de Totales",
+        "valid": false,
+        "severity": "error",
+        "message": "Total de factura es 0 o no encontrado"
+      },
+      {
+        "field": "Porcentaje IVA",
+        "valid": true,
+        "severity": "warning",
+        "message": "Subtotal es 0, no se puede calcular % IVA"
+      },
+      {
+        "field": "Suma de Ítems",
+        "valid": false,
+        "severity": "warning",
+        "message": "Suma de ítems (2984308.00) no coincide con subtotal (0.00)"
+      },
+      {
+        "field": "Actividad Económica",
+        "valid": true,
+        "severity": "warning",
+        "message": "Código de actividad económica no especificado"
+      },
+      {
+        "field": "Retención en la Fuente",
+        "valid": true,
+        "severity": "warning",
+        "message": "Subtotal es 0, no se puede validar retención"
+      },
+      {
+        "field": "Fecha Límite de Pago",
+        "valid": true,
+        "severity": "warning",
+        "message": "Fecha límite de pago no especificada"
+      },
+      {
+        "field": "Resolución DIAN",
+        "valid": true,
+        "severity": "warning",
+        "message": "No se pudo validar resolución DIAN (sin base de conocimiento)"
+      }
+    ],
+    "recommendation": "❌ Factura requiere revisión manual",
+    "total_validations": 10,
+    "passed_validations": 5
+  }
+}

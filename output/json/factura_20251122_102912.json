@@ -1,0 +1,101 @@
+{
+  "numero_factura": "0131090",
+  "fecha_emision": "2025-11-20",
+  "proveedor": "LAMBERTI SYNTHESIS USA, INC. .",
+  "nit_proveedor": "806009473-5",
+  "direccion_proveedor": "CR 7 80 49",
+  "subtotal": 445.0,
+  "impuestos": "84.55",
+  "total": 445.0,
+  "moneda": "USD",
+  "items": [
+    {
+      "descripcion": "HANDLING ULS",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "85.00"
+    }
+  ],
+  "nit_emisor": "806009473-5",
+  "iva": 0.0,
+  "cufe": "N/A",
+  "actividad_economica": "N/A",
+  "retencion_fuente": 0.04,
+  "forma_pago": "N/A",
+  "fecha_limite_pago": "N/A",
+  "validation": {
+    "valid": true,
+    "confidence_score": 0.7,
+    "errors": [],
+    "warnings": [
+      "Dígito de verificación incorrecto. Esperado: 8, Encontrado: 5",
+      "CUFE no encontrado (requerido para factura electrónica)",
+      "Suma de ítems (85.00) no coincide con subtotal (445.00)"
+    ],
+    "validations": [
+      {
+        "field": "Fecha de Emisión",
+        "valid": true,
+        "severity": "success",
+        "message": "Fecha de emisión válida: 2025-11-20"
+      },
+      {
+        "field": "NIT Emisor",
+        "valid": false,
+        "severity": "warning",
+        "message": "Dígito de verificación incorrecto. Esperado: 8, Encontrado: 5"
+      },
+      {
+        "field": "CUFE",
+        "valid": false,
+        "severity": "warning",
+        "message": "CUFE no encontrado (requerido para factura electrónica)"
+      },
+      {
+        "field": "Coherencia de Totales",
+        "valid": true,
+        "severity": "success",
+        "message": "Totales coherentes: 445.00 + 0.00 = 445.00"
+      },
+      {
+        "field": "Porcentaje IVA",
+        "valid": true,
+        "severity": "success",
+        "message": "IVA válido: 0.00%"
+      },
+      {
+        "field": "Suma de Ítems",
+        "valid": false,
+        "severity": "warning",
+        "message": "Suma de ítems (85.00) no coincide con subtotal (445.00)"
+      },
+      {
+        "field": "Actividad Económica",
+        "valid": true,
+        "severity": "warning",
+        "message": "Código de actividad económica no especificado"
+      },
+      {
+        "field": "Retención en la Fuente",
+        "valid": true,
+        "severity": "success",
+        "message": "Retención en la fuente: 4.00%"
+      },
+      {
+        "field": "Fecha Límite de Pago",
+        "valid": true,
+        "severity": "warning",
+        "message": "Fecha límite de pago no especificada"
+      },
+      {
+        "field": "Resolución DIAN",
+        "valid": true,
+        "severity": "warning",
+        "message": "No se pudo validar resolución DIAN (sin base de conocimiento)"
+      }
+    ],
+    "recommendation": "⚠️ Factura válida con advertencias menores",
+    "total_validations": 10,
+    "passed_validations": 7
+  }
+}

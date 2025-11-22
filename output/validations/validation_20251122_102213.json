@@ -1,0 +1,77 @@
+{
+  "valid": false,
+  "confidence_score": 0.6,
+  "errors": [
+    "NIT del emisor no encontrado",
+    "Totales no coinciden: Subtotal(176.47) + IVA(0.00) = 176.47 ≠ Total(210.00)"
+  ],
+  "warnings": [
+    "CUFE no encontrado (requerido para factura electrónica)",
+    "Suma de ítems (217.00) no coincide con subtotal (176.47)"
+  ],
+  "validations": [
+    {
+      "field": "Fecha de Emisión",
+      "valid": true,
+      "severity": "success",
+      "message": "Fecha de emisión válida: 2025-07-05"
+    },
+    {
+      "field": "NIT Emisor",
+      "valid": false,
+      "severity": "error",
+      "message": "NIT del emisor no encontrado"
+    },
+    {
+      "field": "CUFE",
+      "valid": false,
+      "severity": "warning",
+      "message": "CUFE no encontrado (requerido para factura electrónica)"
+    },
+    {
+      "field": "Coherencia de Totales",
+      "valid": false,
+      "severity": "error",
+      "message": "Totales no coinciden: Subtotal(176.47) + IVA(0.00) = 176.47 ≠ Total(210.00)"
+    },
+    {
+      "field": "Porcentaje IVA",
+      "valid": true,
+      "severity": "success",
+      "message": "IVA válido: 0.00%"
+    },
+    {
+      "field": "Suma de Ítems",
+      "valid": false,
+      "severity": "warning",
+      "message": "Suma de ítems (217.00) no coincide con subtotal (176.47)"
+    },
+    {
+      "field": "Actividad Económica",
+      "valid": true,
+      "severity": "warning",
+      "message": "Código de actividad económica no especificado"
+    },
+    {
+      "field": "Retención en la Fuente",
+      "valid": true,
+      "severity": "success",
+      "message": "Retención en la fuente: 4.00%"
+    },
+    {
+      "field": "Fecha Límite de Pago",
+      "valid": true,
+      "severity": "warning",
+      "message": "Fecha límite de pago no especificada"
+    },
+    {
+      "field": "Resolución DIAN",
+      "valid": true,
+      "severity": "warning",
+      "message": "No se pudo validar resolución DIAN (sin base de conocimiento)"
+    }
+  ],
+  "recommendation": "❌ Factura requiere revisión manual",
+  "total_validations": 10,
+  "passed_validations": 6
+}

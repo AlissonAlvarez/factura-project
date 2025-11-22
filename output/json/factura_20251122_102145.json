@@ -1,0 +1,133 @@
+{
+  "numero_factura": "ELECTR",
+  "fecha_emision": "30/08/2023",
+  "proveedor": "N/A",
+  "nit_proveedor": "900342297-2",
+  "direccion_proveedor": "N/A",
+  "subtotal": 205.546,
+  "impuestos": "0.00",
+  "total": 4.0,
+  "moneda": "USD",
+  "items": [
+    {
+      "descripcion": "Pag 1 /",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "1"
+    },
+    {
+      "descripcion": "DIRECCIÓN: bogota TELEFONO:",
+      "cantidad": "N/A",
+      "precio_unitario": "N/A",
+      "total": "3108176530"
+    },
+    {
+      "descripcion": "10126436007 CAMISETA UNIC PREM, LIL 610, M 1,00 unidad 19 $50.336,13 $50.336,00",
+      "cantidad": 1.0,
+      "precio_unitario": 1.0,
+      "total": 9.0
+    },
+    {
+      "descripcion": "35004731075 CAMISETA BASICA H, AZU 720, XXS 1,00 unidad 19 $46.134,45 $46.134,00",
+      "cantidad": 1.0,
+      "precio_unitario": 1.0,
+      "total": 205.54
+    },
+    {
+      "descripcion": "35005104003 CAMISETA MODA H, AZU 730, S 1,00 unidad 19 $50.336,13 $50.336,00",
+      "cantidad": 1.0,
+      "precio_unitario": 1.0,
+      "total": 0.0
+    },
+    {
+      "descripcion": "35005135001 CAMISETA MODA H, BLA 000, XXS 1,00 unidad 19 $58.739,50 $58.739,00",
+      "cantidad": 1.0,
+      "precio_unitario": 1.0,
+      "total": 6.22
+    }
+  ],
+  "nit_emisor": "900342297-2",
+  "iva": 0.0,
+  "cufe": "N/A",
+  "actividad_economica": "N/A",
+  "retencion_fuente": 0.04,
+  "forma_pago": "N/A",
+  "fecha_limite_pago": "N/A",
+  "validation": {
+    "valid": false,
+    "confidence_score": 0.6,
+    "errors": [
+      "Totales no coinciden: Subtotal(205.55) + IVA(0.00) = 205.55 ≠ Total(4.00)"
+    ],
+    "warnings": [
+      "Dígito de verificación incorrecto. Esperado: 1, Encontrado: 2",
+      "CUFE no encontrado (requerido para factura electrónica)",
+      "Suma de ítems (3108176751.76) no coincide con subtotal (205.55)"
+    ],
+    "validations": [
+      {
+        "field": "Fecha de Emisión",
+        "valid": true,
+        "severity": "success",
+        "message": "Fecha de emisión válida: 30/08/2023"
+      },
+      {
+        "field": "NIT Emisor",
+        "valid": false,
+        "severity": "warning",
+        "message": "Dígito de verificación incorrecto. Esperado: 1, Encontrado: 2"
+      },
+      {
+        "field": "CUFE",
+        "valid": false,
+        "severity": "warning",
+        "message": "CUFE no encontrado (requerido para factura electrónica)"
+      },
+      {
+        "field": "Coherencia de Totales",
+        "valid": false,
+        "severity": "error",
+        "message": "Totales no coinciden: Subtotal(205.55) + IVA(0.00) = 205.55 ≠ Total(4.00)"
+      },
+      {
+        "field": "Porcentaje IVA",
+        "valid": true,
+        "severity": "success",
+        "message": "IVA válido: 0.00%"
+      },
+      {
+        "field": "Suma de Ítems",
+        "valid": false,
+        "severity": "warning",
+        "message": "Suma de ítems (3108176751.76) no coincide con subtotal (205.55)"
+      },
+      {
+        "field": "Actividad Económica",
+        "valid": true,
+        "severity": "warning",
+        "message": "Código de actividad económica no especificado"
+      },
+      {
+        "field": "Retención en la Fuente",
+        "valid": true,
+        "severity": "success",
+        "message": "Retención en la fuente: 4.00%"
+      },
+      {
+        "field": "Fecha Límite de Pago",
+        "valid": true,
+        "severity": "warning",
+        "message": "Fecha límite de pago no especificada"
+      },
+      {
+        "field": "Resolución DIAN",
+        "valid": true,
+        "severity": "warning",
+        "message": "No se pudo validar resolución DIAN (sin base de conocimiento)"
+      }
+    ],
+    "recommendation": "❌ Factura requiere revisión manual",
+    "total_validations": 10,
+    "passed_validations": 6
+  }
+}

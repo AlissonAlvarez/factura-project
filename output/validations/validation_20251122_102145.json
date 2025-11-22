@@ -1,0 +1,77 @@
+{
+  "valid": false,
+  "confidence_score": 0.6,
+  "errors": [
+    "Totales no coinciden: Subtotal(205.55) + IVA(0.00) = 205.55 ≠ Total(4.00)"
+  ],
+  "warnings": [
+    "Dígito de verificación incorrecto. Esperado: 1, Encontrado: 2",
+    "CUFE no encontrado (requerido para factura electrónica)",
+    "Suma de ítems (3108176751.76) no coincide con subtotal (205.55)"
+  ],
+  "validations": [
+    {
+      "field": "Fecha de Emisión",
+      "valid": true,
+      "severity": "success",
+      "message": "Fecha de emisión válida: 30/08/2023"
+    },
+    {
+      "field": "NIT Emisor",
+      "valid": false,
+      "severity": "warning",
+      "message": "Dígito de verificación incorrecto. Esperado: 1, Encontrado: 2"
+    },
+    {
+      "field": "CUFE",
+      "valid": false,
+      "severity": "warning",
+      "message": "CUFE no encontrado (requerido para factura electrónica)"
+    },
+    {
+      "field": "Coherencia de Totales",
+      "valid": false,
+      "severity": "error",
+      "message": "Totales no coinciden: Subtotal(205.55) + IVA(0.00) = 205.55 ≠ Total(4.00)"
+    },
+    {
+      "field": "Porcentaje IVA",
+      "valid": true,
+      "severity": "success",
+      "message": "IVA válido: 0.00%"
+    },
+    {
+      "field": "Suma de Ítems",
+      "valid": false,
+      "severity": "warning",
+      "message": "Suma de ítems (3108176751.76) no coincide con subtotal (205.55)"
+    },
+    {
+      "field": "Actividad Económica",
+      "valid": true,
+      "severity": "warning",
+      "message": "Código de actividad económica no especificado"
+    },
+    {
+      "field": "Retención en la Fuente",
+      "valid": true,
+      "severity": "success",
+      "message": "Retención en la fuente: 4.00%"
+    },
+    {
+      "field": "Fecha Límite de Pago",
+      "valid": true,
+      "severity": "warning",
+      "message": "Fecha límite de pago no especificada"
+    },
+    {
+      "field": "Resolución DIAN",
+      "valid": true,
+      "severity": "warning",
+      "message": "No se pudo validar resolución DIAN (sin base de conocimiento)"
+    }
+  ],
+  "recommendation": "❌ Factura requiere revisión manual",
+  "total_validations": 10,
+  "passed_validations": 6
+}

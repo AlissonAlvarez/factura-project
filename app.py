@@ -40,7 +40,11 @@ def init_validator():
 validator = init_validator()
 
 # --- AJUSTE: Función robusta para rellenar campos sin nulos ---
+# --- AJUSTE: Función robusta para rellenar campos sin nulos ---
 def fill_invoice_robust(data, ocr_text):
+    """
+    Rellena campos faltantes o vacíos, pero RESPETA valores ya extraídos correctamente.
+    """
     defaults = {
         "proveedor": "N/A",
         "nit_proveedor": "N/A",
@@ -54,61 +58,83 @@ def fill_invoice_robust(data, ocr_text):
         "items": []
     }
 
+    # Solo aplicar defaults si el valor está vacío o es None
     for k, v in defaults.items():
-        if k not in data or data[k] in [None, "NULL", "N/A"]:
+        if k not in data or data[k] in [None, "NULL", ""]:
             data[k] = v
 
-    match = re.search(r"(SHIPPER|Proveedor|Seller)[:\s]*(.+?)(?:\n|MBL_|HBL_|$)", ocr_text, re.IGNORECASE)
-    if match:
-        data["proveedor"] = match.group(2).strip()
+    # IMPORTANTE: Solo buscar si el valor actual es N/A o 0.00
+    # Proveedor
+    if data.get("proveedor") in [None, "N/A", ""]:
+        match = re.search(r"(SHIPPER|Proveedor|Seller)[:\s]*(.+?)(?:\n|MBL_|HBL_|$)", ocr_text, re.IGNORECASE)
+        if match:
+            data["proveedor"] = match.group(2).strip()
 
-    match = re.search(r"NIT[:\s]*(\d{5,}-?\d*)", ocr_text, re.IGNORECASE)
-    if match:
-        data["nit_proveedor"] = match.group(1).strip()
+    # NIT
+    if data.get("nit_proveedor") in [None, "N/A", ""]:
+        match = re.search(r"NIT[:\s]*(\d{5,}-?\d*)", ocr_text, re.IGNORECASE)
+        if match:
+            data["nit_proveedor"] = match.group(1).strip()
 
-    match = re.search(r"(CR|CARRERA|CL|CALLE)\s?\d{1,4}\s?\d{0,4}", ocr_text, re.IGNORECASE)
-    if match:
-        data["direccion_proveedor"] = match.group(0).strip()
+    # Dirección
+    if data.get("direccion_proveedor") in [None, "N/A", ""]:
+        match = re.search(r"(CR|CARRERA|CL|CALLE)\s?\d{1,4}\s?\d{0,4}", ocr_text, re.IGNORECASE)
+        if match:
+            data["direccion_proveedor"] = match.group(0).strip()
 
-    match = re.search(r"(\d{2}[/-]\d{2}[/-]\d{4})", ocr_text)
-    if match:
-        fecha = match.group(1).replace("-", "/")
-        partes = fecha.split("/")
-        if len(partes) == 3:
-            mes, dia, anio = partes[0], partes[1], partes[2]
-            data["fecha_emision"] = f"{anio}-{mes}-{dia}"
+    # Fecha
+    if data.get("fecha_emision") in [None, "N/A", ""]:
+        match = re.search(r"(\d{2}[/-]\d{2}[/-]\d{4})", ocr_text)
+        if match:
+            fecha = match.group(1).replace("-", "/")
+            partes = fecha.split("/")
+            if len(partes) == 3:
+                mes, dia, anio = partes[0], partes[1], partes[2]
+                data["fecha_emision"] = f"{anio}-{mes}-{dia}"
 
-    match = re.search(r"(Factura|Invoice|No\.|Número)[:\s]*(\S+)", ocr_text, re.IGNORECASE)
-    if match:
-        data["numero_factura"] = match.group(2).strip()
+    # Número de factura
+    if data.get("numero_factura") in [None, "N/A", ""]:
+        match = re.search(r"(Factura|Invoice|No\.|Número)[:\s]*(\S+)", ocr_text, re.IGNORECASE)
+        if match:
+            data["numero_factura"] = match.group(2).strip()
 
-    match = re.search(r"(USD|COP|EUR|MXN)", ocr_text, re.IGNORECASE)
-    if match:
-        data["moneda"] = match.group(1).upper()
+    # Moneda
+    if data.get("moneda") in [None, "N/A", ""]:
+        match = re.search(r"(USD|COP|EUR|MXN)", ocr_text, re.IGNORECASE)
+        if match:
+            data["moneda"] = match.group(1).upper()
 
+    # CRÍTICO: Solo buscar totales si están en "0.00" (no sobrescribir valores correctos)
     patterns_totales = {
-        "subtotal": r"Subtotal[:\s]*([0-9\.,]+)",
+        "subtotal": r"(Sub-total|Subtotal)[:\s]*([0-9\.,]+)",
         "impuestos": r"(IVA|Iva|Impuestos)[:\s]*([0-9\.,]+)",
-        "total": r"Total[:\s]*([0-9\.,]+)"
+        "total": r"(Total\s+USD|Total)[:\s]*([0-9\.,]+)"
     }
+    
     for key, pat in patterns_totales.items():
-        match = re.search(pat, ocr_text, re.IGNORECASE)
-        if match:
-            data[key] = match.groups()[-1].replace(",", "")
+        # Solo aplicar si el valor actual es 0.00 o None
+        current_value = str(data.get(key, "0.00"))
+        if current_value in ["0.00", "0", "", "None", "N/A"]:
+            match = re.search(pat, ocr_text, re.IGNORECASE)
+            if match:
+                # Tomar el último grupo (el número)
+                data[key] = match.groups()[-1].replace(",", "")
 
-    items = []
-    lines = [line.strip() for line in ocr_text.splitlines() if line.strip()]
-    for line in lines:
-        match = re.match(r"(.+?)\s+([0-9]{1,3}[0-9\.,]*)$", line)
-        if match:
-            items.append({
-                "descripcion": match.group(1).strip(),
-                "cantidad": "N/A",
-                "precio_unitario": "N/A",
-                "total": match.group(2).replace(",", "")
-            })
-    if items:
-        data["items"] = items
+    # Items - Solo agregar si está vacío
+    if not data.get("items"):
+        items = []
+        lines = [line.strip() for line in ocr_text.splitlines() if line.strip()]
+        for line in lines:
+            match = re.match(r"(.+?)\s+([0-9]{1,3}[0-9\.,]*)$", line)
+            if match:
+                items.append({
+                    "descripcion": match.group(1).strip(),
+                    "cantidad": "N/A",
+                    "precio_unitario": "N/A",
+                    "total": match.group(2).replace(",", "")
+                })
+        if items:
+            data["items"] = items
 
     return data
 
